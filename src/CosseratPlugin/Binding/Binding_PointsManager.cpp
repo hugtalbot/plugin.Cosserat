@@ -17,11 +17,12 @@
 *******************************************************************************
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <SofaPython3/PythonFactory.h>
-#include <SofaPython3/Sofa/Core/Binding_Base.h>
-#include <SofaPython3/Sofa/Core/Binding_BaseContext.h>
-#include "Binding_PointsManager.h"
+#include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <SofaPython3/Sofa/Core/Binding_Base.h>
+#include <Cosserat/Binding/Binding_PointsManager.h>
+#include <SofaPython3/PythonFactory.h>
+#include <SofaPython3/Sofa/Core/Binding_BaseContext.h>
 #include <CosseratPlugin/engine/PointsManager.h>
 
 typedef sofa::core::behavior::PointsManager PointsManager;
@@ -38,13 +39,14 @@ namespace sofapython3 {
 void moduleAddPointsManager(py::module& m) {
   py::class_<PointsManager, Base, py_shared_ptr<PointsManager>> c(m, "PointsManager");
 
+  c.def("addNewPointToState", &PointsManager::addNewPointToState);
+  c.def("removeLastPointfromState", &PointsManager::removeLastPointfromState);
+
   /// register the PointSetTopologyModifier binding in the downcasting subsystem
   PythonFactory::registerType<PointsManager>([](sofa::core::objectmodel::Base* object) {
     return py::cast(dynamic_cast<PointsManager*>(object));
   });
 
-    c.def("addNewPointToState", &PointsManager::addNewPointToState);
-    c.def("removeLastPointfromState", &PointsManager::removeLastPointfromState);
 }
 
 }  // namespace sofapython3
