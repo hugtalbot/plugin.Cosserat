@@ -20,7 +20,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <SofaPython3/Sofa/Core/Binding_Base.h>
-#include <Cosserat/Binding/Binding_PointsManager.h>
+#include "Binding_PointsManager.h"
 #include <SofaPython3/PythonFactory.h>
 #include <SofaPython3/Sofa/Core/Binding_BaseContext.h>
 #include <CosseratPlugin/engine/PointsManager.h>
